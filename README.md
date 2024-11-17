@@ -1,3 +1,5 @@
 # kmp_flutter_sample
 
-Flutter内部でKotlin Multiplatform使いたい！のサンプル
+記事執筆中
+
+【Flutter】FlutterのネイティブコードにKotlin Multiplatformを導入し、連携してみる【KMP】
