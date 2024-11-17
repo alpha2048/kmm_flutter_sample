@@ -5,3 +5,6 @@ interface Platform {
 }
 
 expect fun getPlatform(): Platform
+
+expect class SPref
+expect fun SPref.getFlutterSavedData(): String

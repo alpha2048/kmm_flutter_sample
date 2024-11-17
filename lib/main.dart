@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter KMP Sample',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -43,8 +45,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   static const methodChannel = MethodChannel('platform_method/kmp');
 
-  String greeting = "";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,34 +53,74 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'KMPのデータ: $greeting',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              ElevatedButton(
+                onPressed: () async {
+                  final data = DateTime.now().toIso8601String();
+
+                  final prefs = await SharedPreferences.getInstance();
+                  await prefs.setString('savedDataFromFlutter',
+                      "保存日: $data");
+
+                  final SharedPreferencesAsync asyncPrefs = SharedPreferencesAsync();
+                  await asyncPrefs.setString('savedDataFromFlutter',
+                      "保存日: $data");
+
+                  Fluttertoast.showToast(
+                      msg: "保存したデータ: $data",
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 3,
+                      backgroundColor: Colors.blueGrey,
+                      textColor: Colors.white,
+                      fontSize: 18.0);
+                },
+                child: Text(
+                  "データを入れる",
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  try {
+                    final res = await methodChannel.invokeMethod('getGreeting');
+                    print("Method Channelデータ取得: $res");
+                    Fluttertoast.showToast(
+                        msg: "データ取得: $res",
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 3,
+                        backgroundColor: Colors.blueGrey,
+                        textColor: Colors.white,
+                        fontSize: 18.0);
+                  } on PlatformException catch (e) {
+                    print("Method Channelデータ取得エラー: $e");
+                    Fluttertoast.showToast(
+                        msg: "データ取得エラー: $e",
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 3,
+                        backgroundColor: Colors.blueGrey,
+                        textColor: Colors.white,
+                        fontSize: 18.0);
+                  }
+                },
+                child: Text(
+                  "Method Channelからデータ取得",
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          try {
-            final res = await methodChannel.invokeMethod('getGreeting');
-            print("Method Channelデータ取得: $res");
-            setState(() {
-              greeting = res;
-            });
-          } on PlatformException catch (e) {
-            setState(() {
-              greeting = "取得失敗";
-            });
-            print("Method Channelデータ取得: 取得失敗");
-          }
-        },
-        tooltip: '設定取得',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

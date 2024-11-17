@@ -16,7 +16,7 @@ class MainActivity: FlutterActivity() {
         val channel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "platform_method/kmp")
         channel.setMethodCallHandler { methodCall: MethodCall, result: MethodChannel.Result ->
             if (methodCall.method == "getGreeting") {
-                val greet = Greeting().greet()
+                val greet = Greeting().platformNameWithString(this)
                 result.success(greet)
             }
             else {

@@ -66,7 +66,14 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                // put your Multiplatform dependencies here
+                //implementation("androidx.datastore:datastore-preferences-core:1.1.1")
+            }
+        }
+
+        val androidMain by getting { // note androidMain here
+            dependencies {
+                implementation("androidx.datastore:datastore:1.1.1")
+                implementation("androidx.datastore:datastore-preferences:1.1.1")
             }
         }
     }
@@ -78,8 +85,8 @@ android {
     namespace = "com.example.kmp_flutter_sample.shared"
     compileSdk = 34
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     defaultConfig {
         minSdk = 21
