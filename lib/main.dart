@@ -66,9 +66,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   await prefs.setString('savedDataFromFlutter',
                       "保存日: $data");
 
-                  final SharedPreferencesAsync asyncPrefs = SharedPreferencesAsync();
-                  await asyncPrefs.setString('savedDataFromFlutter',
-                      "保存日: $data");
+                  /// 以下はDataStoreを使うため、同時にアクセスできないので使用しない
+                  // final SharedPreferencesAsync asyncPrefs = SharedPreferencesAsync();
+                  // await asyncPrefs.setString('savedDataFromFlutter',
+                  //     "保存日: $data");
 
                   Fluttertoast.showToast(
                       msg: "保存したデータ: $data",
