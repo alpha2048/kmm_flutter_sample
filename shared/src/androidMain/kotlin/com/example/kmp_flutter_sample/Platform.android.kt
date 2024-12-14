@@ -21,17 +21,13 @@ actual fun SPref.getFlutterSavedData(): String {
     )
     return preferences.getString("flutter.savedDataFromFlutter", "データなし") ?: "データなし"
 
-    /// SharedPreferencesAsync(DataStore)から取るなら以下だが、ファイル競合が起きるので要検討
+    /// SharedPreferencesAsync(DataStore)から取るなら以下だが、ファイル競合が起きるので動作不可
 //    val value: String?
 //    runBlocking {
-//        Log.d("Platform Android", "テスト1 test")
 //        val preferencesKey = stringPreferencesKey("savedDataFromFlutter")
-//        Log.d("Platform Android", "テスト2 test")
 //        val preferenceFlow: Flow<String?> =
 //            this@getFlutterSavedData.application.sharedPreferencesDataStore.data.map { preferences -> preferences[preferencesKey] }
-//        Log.d("Platform Android", "テスト3 test")
 //        value = preferenceFlow.firstOrNull()
-//        Log.d("Platform Android", "テスト4 test")
 //    }
-//    return value ?: "データエラー"
+//    return value ?: "データなし"
 }
