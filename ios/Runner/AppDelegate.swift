@@ -14,10 +14,8 @@ import Shared
         kmpChannel.setMethodCallHandler({
             (methodCall: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
             if (methodCall.method == "getGreeting") {
-                //let greet = Greeting().greet()
-                let greet2 = Greeting().platformNameWithString(context: NSObject())
-                //let greet = Gree
-                result(greet2)
+                let greet = Greeting().platformNameWithString(context: NSObject())
+                result(greet)
             } else {
                 result(FlutterMethodNotImplemented)
             }
