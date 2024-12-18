@@ -12,7 +12,6 @@ class MainActivity: FlutterActivity() {
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
 
-        /* @POINT1 チャンネルとハンドラコールバック登録 */
         val channel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "platform_method/kmp")
         channel.setMethodCallHandler { methodCall: MethodCall, result: MethodChannel.Result ->
             if (methodCall.method == "getGreeting") {

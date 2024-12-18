@@ -96,7 +96,6 @@
 				3732138BC04620FDFDA8E318 /* Pods-Runner.release.xcconfig */,
 				B782342ED039B516BFF60FA0 /* Pods-Runner.profile.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -306,7 +305,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
+			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n";
 		};
 		DE3719802CE0A3E300FDAB17 /* Compile Kotlin Framework */ = {
 			isa = PBXShellScriptBuildPhase;
