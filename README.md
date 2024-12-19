@@ -1,5 +1,3 @@
 # kmp_flutter_sample
 
-記事執筆中
-
-【Flutter】FlutterのネイティブコードにKotlin Multiplatformを導入し、連携してみる【KMP】
+[【Flutter】FlutterのネイティブコードにKotlin Multiplatformを導入し、連携してみる【KMP】](https://alpha2048.hatenablog.com/entry/2024/12/19/095613)
